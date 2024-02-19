@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}{{author}}{% endblock %}
+
+{% block content %}
+<h1>Cтатьи {{author}}</h1>
+<ul>
+    {%for article in articles%}
+    <tr>
+        {% if article.published == 1 %}
+        <h4><a href="{% url 'article_full' article.id %}">{{ article.title }}</a></h4>
+        {% else %}
+        <h4>{{article.title}}</h4>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %} {{article.title}} {% endblock %}
+
+{% block content %}
+<h1>{{author}}</h1>
+<h1>{{article.title}}</h1>
+<p>{{ article.content }}</p>
+<p>Дата публикации:{{article.publication_date}}</p>
+<p>Просмотры:{{article.views_count}}</p>
+{%for comment in comments%}
+    <tr>
+
+        <p>{{comment.author}}</p>
+        <p>{{ comment.comment }}</p>
+        {% if comment.update_date is not Null%}
+            <p>Изменено:{{comment.update_date}}</p>
+        {% else %}
+        <p>{{comment.creation_date}}</p>
+        {% endif %}
+
+    </tr>
+
+
+    {% endfor %}
+  <form action="" method="post" class="post-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.as_p}}
+        <input type="submit" value="Отправить">
+      </form>
+{% endblock %}
